@@ -111,8 +111,8 @@ The application consists of multiple microservices communicating via an **event-
 1. **Clone the Repository**  
 
    ```bash
-   git clone https://github.com/your-username/ecommerce-microservices.git
-   cd ecommerce-microservices
+   git clone https://github.com/khanhtrinh107/microservices-event_sourcing-cqrs-saga_pattern
+   cd microservices-event_sourcing-cqrs-saga_pattern
 
 2. **Start DB Setup using Docker Compose**  
 
