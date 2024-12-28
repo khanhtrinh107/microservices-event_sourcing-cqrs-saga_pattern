@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: PRODUCT-QUERY-SERVICE
+          uri:
+            lb://PRODUCT-QUERY-SERVICE
+          predicates:
+            - Path=/products/**, /categories/**, /comment/**
+        - id: PRODUCT-COMMAND-SERVICE
+          uri:
+            lb://PRODUCT-COMMAND-SERVICE
+          predicates:
+            - Path=/product/**, /category/**
+        - id: USER-SERVICE
+          uri:
+            lb://USER-SERVICE
+          predicates:
+            - Path=/user/**, /auth/**, /users/**, /
+        - id: SEMESTERS-SERVICE
+          uri:
+            lb://SEMESTERS-SERVICE
+          predicates:
+            - Path=/semester/**
+        - id: SUBMIT-SERVICE
+          uri:
+            lb://SUBMIT-SERVICE
+          predicates:
+            - Path=/submit/**, /event/**
+        - id: TASK-SERVICE
+          uri:
+            lb://TASK-SERVICE
+          predicates:
+            - Path=/task/**
+        - id: CRITERIA-SERVICE
+          uri:
+            lb://CRITERIA-SERVICE
+          predicates:
+            - Path=/criteria/**
+        - id: NOTIFICATION-SERVICE
+          uri:
+            lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/notification/**
+        - id: PAYMENT-SERVICE
+          uri:
+            lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/account/**, /payment/**
+        - id: ORDER-QUERY-SERVICE
+          uri:
+            lb://ORDER-QUERY-SERVICE
+          predicates:
+            - Path=/cart/**, /order/**
+        - id: SHIPMENT-SERVICE
+          uri:
+            lb://SHIPMENT-SERVICE
+          predicates:
+            - Path=/address/**, /shipment/**
+        - id: ORDER-SERVICE
+          uri:
+            lb://ORDER-SERVICE
+          predicates:
+            - Path=/orders/**,
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+
+
+
+server:
+  port: 8080
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
